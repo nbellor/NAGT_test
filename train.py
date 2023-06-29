@@ -74,7 +74,7 @@ args = parse_args()
 
 
 
-device = args.device
+device = 'cpu'
 
 random.seed(args.seed)
 np.random.seed(args.seed)
