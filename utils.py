@@ -96,15 +96,19 @@ def laplacian_positional_encoding(g, pos_enc_dim):
 
 
 def re_features(adj, features, K):
-    #传播之后的特征矩阵,size= (N, 1, K+1, d )
+    #传播之后的特征矩阵,size= (N, 1, K+1, d ) Feature matrix after propagation
+    
+    # hop2token function 
+    # squeezes the second dimension of the tensor (never used)
     nodes_features = torch.empty(features.shape[0], 1, K+1, features.shape[1])
 
     for i in range(features.shape[0]):
 
         nodes_features[i, 0, 0, :] = features[i]
 
-    x = features + torch.zeros_like(features)
+    x = features + torch.zeros_like(features) # tf is this?
 
+    # can be improved by removing the second for
     for i in range(K):
 
         x = torch.matmul(adj, x)
